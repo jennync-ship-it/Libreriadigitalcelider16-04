@@ -39,7 +39,6 @@
       pointer-events: none; 
     }
 
-    /* Animaciones dinámicas para la bienvenida */
     @keyframes floatLogo {
       0% { transform: translateY(0px) scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 0 0 rgba(198, 40, 40, 0.4); }
       50% { transform: translateY(-10px) scale(1.03); box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 25px 10px rgba(198, 40, 40, 0.2); }
@@ -54,7 +53,7 @@
     
     .intro-logo-container {
       background: var(--white); padding: 15px; border-radius: 50%;
-      margin: 25px auto; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      margin: 20px auto; cursor: pointer; display: flex; align-items: center; justify-content: center;
       width: 150px; height: 150px; border: 4px solid var(--red);
       animation: floatLogo 3s ease-in-out infinite;
       transition: transform 0.2s ease, border-color 0.2s ease;
@@ -84,7 +83,7 @@
     
     .intro-hint { 
       background: rgba(255, 255, 255, 0.18); 
-      padding: 12px 25px; 
+      padding: 10px 22px; 
       border-radius: 999px; 
       font-size: 0.95rem; 
       font-weight: bold; 
@@ -116,7 +115,6 @@
     .logo { width: 58px; height: 58px; object-fit: contain; border-radius: 50%; }
     .brand h1 { color: var(--blue); font-size: 1.25rem; line-height: 1.2; }
     .brand p { color: var(--gray-dark); font-size: 0.85rem; margin-top: 3px; }
-    .header-actions { display: flex; align-items: center; gap: 8px; }
 
     .navigation { background: var(--blue); display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; padding: 8px 5%; }
     .navigation button {
@@ -132,6 +130,13 @@
     .btn.danger { background: var(--red); color: var(--white); }
     .btn.success { background: var(--success); color: var(--white); }
     .btn.full { width: 100%; }
+
+    /* Mini botones de acción rápida en la biblioteca */
+    .library-actions { display: flex; gap: 10px; margin: 15px 0 25px 0; flex-wrap: wrap; }
+    .btn-mini { padding: 8px 14px; font-size: 0.85rem; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-mini:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-mini.create-folder { background: #2563eb; color: var(--white); }
+    .btn-mini.upload-file { background: #059669; color: var(--white); }
 
     .message { width: min(900px, 90%); margin: 18px auto 0; padding: 13px 16px; border-radius: 8px; font-weight: 600; display: none; }
     .message.success { background: #e8f7ef; color: var(--success); border: 1px solid #b8e4ca; }
@@ -170,6 +175,7 @@
     label { font-weight: 700; margin-top: 8px; }
     input, textarea, select { width: 100%; border: 1px solid #cbd2d9; border-radius: 8px; padding: 12px; font: inherit; background: var(--white); outline: none; }
     input:focus, textarea:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(11,45,92,0.1); }
+    input[type="file"] { padding: 9px; background: var(--gray); cursor: pointer; }
 
     .resources-grid, .volunteers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .resource-card, .volunteer-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 22px; border-left: 5px solid var(--blue); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
@@ -185,11 +191,14 @@
     .chat-bubble p { color: var(--black); font-size: 0.95rem; margin-bottom: 6px; }
     .chat-bubble small { color: var(--gray-dark); font-size: 0.78rem; }
 
-    .admin-panel { background: var(--white); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 20px; overflow: hidden; }
-    .admin-panel-header { background: var(--blue); color: var(--white); padding: 16px 20px; }
-    .admin-item { padding: 20px; border-bottom: 1px solid var(--border); }
-    .admin-item h3 { color: var(--blue); margin-bottom: 6px; }
-    .admin-item p { color: var(--gray-dark); margin-bottom: 10px; }
+    /* Estilos Adicionales para Carpetas y Paneles Admin */
+    .folders-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 35px; }
+    .folder-box { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; border-top: 5px solid var(--blue); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .folder-box h3 { color: var(--blue); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+    
+    .admin-panel-section { background: var(--white); border: 2px dashed var(--red); border-radius: 15px; padding: 25px; margin-top: 40px; }
+    .admin-panel-section h3 { color: var(--red); margin-bottom: 15px; }
+    .admin-list-item { display: flex; justify-content: space-between; align-items: center; background: var(--gray); padding: 10px 15px; border-radius: 8px; margin-bottom: 8px; gap: 10px; }
 
     footer { background: var(--black); color: var(--white); text-align: center; padding: 25px 15px; margin-top: 30px; }
     footer p { opacity: 0.85; font-size: 0.85rem; }
@@ -214,13 +223,20 @@
       <h1>¡Bienvenidos a tu librería digital!</h1>
       <p>Un espacio seguro creado para consultar, compartir recursos educativos y conectar con toda nuestra comunidad del distrito.</p>
       
-      <!-- Logo dinámico interactivo ubicado exactamente en assets/logo.png -->
-      <div class="intro-logo-container" onclick="enterPlatform()" title="Haz clic en el logo para ingresar">
+      <!-- Logo interactivo -->
+      <div class="intro-logo-container" onclick="enterPlatform()" title="Haz clic para ingresar">
         <img src="assets/logo.png" alt="Logo CELIDER 16-04" class="intro-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3389/3389083.png'">
       </div>
       
-      <div>
-        <span class="intro-hint" onclick="enterPlatform()">👉 Haz clic en el logo para ingresar</span>
+      <!-- Botón de acceso directo garantizado -->
+      <div style="margin-top: 12px;">
+        <button onclick="enterPlatform()" class="btn primary" style="background: var(--red); color: white; padding: 12px 28px; font-size: 1.05rem; border-radius: 999px; cursor: pointer; border: 2px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: bold;">
+          🚀 Ingresar a la Plataforma
+        </button>
+      </div>
+
+      <div style="margin-top: 15px;">
+        <span class="intro-hint" onclick="enterPlatform()">👉 O haz clic en el logo para ingresar</span>
       </div>
     </div>
   </div>
@@ -235,22 +251,17 @@
           <p>Distrito 16-04</p>
         </div>
       </div>
-      <div class="header-actions">
-        <button class="btn primary" onclick="showSection('loginSection')" data-auth="logged-out">Iniciar sesión</button>
-        <button class="btn secondary" onclick="showSection('registerSection')" data-auth="logged-out">Registrarse</button>
-        <button class="btn danger" onclick="logoutUser()" data-auth="logged-in" style="display:none;">Cerrar sesión</button>
-      </div>
     </header>
 
-    <!-- Menú de navegación -->
-    <nav class="navigation">
+    <!-- Menú de navegación dinámico según el rol -->
+    <nav class="navigation" id="mainNavbar">
       <button onclick="showSection('homeSection')">🏠 Inicio</button>
-      <button onclick="showSection('librarySection')">📚 Biblioteca</button>
+      <button onclick="showSection('librarySection')">📚 Biblioteca y Comisiones</button>
       <button onclick="showSection('volunteersSection')">👥 Voluntarios</button>
+      <button id="navMyProfile" onclick="showSection('myProfileSection')" style="display: none;">👤 Mi Perfil</button>
       <button onclick="showSection('anonSection')">💡 Buzón anónimo</button>
       <button onclick="showSection('chatSection')">❓ Chat de preguntas</button>
-      <button onclick="showSection('uploadSection')" data-auth="logged-in" style="display:none;">📤 Subir Archivo</button>
-      <button onclick="showSection('adminSection')" data-role="admin" style="display:none;">⚙️ Administración</button>
+      <button id="navRequestRole" onclick="showSection('requestRoleSection')">🔑 Obtener rol</button>
     </nav>
 
     <div id="message" class="message"></div>
@@ -274,59 +285,130 @@
         </div>
       </section>
 
-      <!-- LOGIN -->
-      <section id="loginSection" class="page-section">
+      <!-- OBTENER ROL AUTOMÁTICO / CÓDIGO -->
+      <section id="requestRoleSection" class="page-section">
         <div class="form-container">
-          <h2>Iniciar sesión</h2>
-          <p>Accede con tus credenciales.</p>
-          <form onsubmit="event.preventDefault(); loginUser();">
+          <h2>🔑 Obtener rol automático</h2>
+          <p>Introduce tu nombre y el código secreto para asignarte el rol de inmediato en el sistema.</p>
+          <form onsubmit="event.preventDefault(); assignRoleAutomatically();">
+            <label>Nombre completo</label>
+            <input id="reqName" type="text" placeholder="Tu nombre" required>
+
             <label>Correo electrónico</label>
-            <input id="loginEmail" type="email" placeholder="correo@ejemplo.com" required>
-            <label>Contraseña</label>
-            <input id="loginPassword" type="password" placeholder="••••••••" required>
-            <button type="submit" class="btn primary full" style="margin-top: 15px;">Entrar</button>
+            <input id="reqEmail" type="email" placeholder="correo@ejemplo.com" required>
+
+            <label>Código secreto</label>
+            <input id="reqCode" type="password" placeholder="Introduce tu código de acceso" required>
+
+            <button type="submit" class="btn primary full" style="margin-top: 15px;">Obtener rol ahora</button>
           </form>
         </div>
       </section>
 
-      <!-- REGISTRO -->
-      <section id="registerSection" class="page-section">
+      <!-- GESTIÓN DE PERFIL -->
+      <section id="myProfileSection" class="page-section">
         <div class="form-container">
-          <h2>Crear cuenta</h2>
-          <p>Regístrate como Voluntario o Delegado.</p>
-          <form onsubmit="event.preventDefault(); registerUser();">
-            <label>Nombre completo</label>
-            <input id="registerName" type="text" placeholder="Tu nombre" required>
-            
-            <label>Tipo de usuario</label>
-            <select id="registerRoleType">
+          <h2>👤 Crear o Editar mi Perfil</h2>
+          <p>Configura tu información personal y comisiones para que aparezca actualizada en el directorio de voluntarios.</p>
+          <form onsubmit="event.preventDefault(); saveMyProfile();">
+            <label>Tu nombre completo</label>
+            <input id="profileName" type="text" placeholder="Tu nombre y apellido" required>
+
+            <label>Correo electrónico</label>
+            <input id="profileEmail" type="email" placeholder="correo@ejemplo.com" required>
+
+            <label>Comisión</label>
+            <input id="profileCommission" type="text" placeholder="Comisión en la que estás" required>
+
+            <label>Tu Rol</label>
+            <select id="profileRole" required>
               <option value="voluntario">Voluntario</option>
-              <option value="delegado">Delegado</option>
+              <option value="admin">Administrador</option>
             </select>
 
-            <label>Correo electrónico</label>
-            <input id="registerEmail" type="email" placeholder="correo@ejemplo.com" required>
-            
-            <label>Contraseña</label>
-            <input id="registerPassword" type="password" placeholder="Mínimo 6 caracteres" minlength="6" required>
-            
-            <label>Código especial de acceso (Opcional)</label>
-            <input id="registerSpecialCode" type="password" placeholder="">
-
-            <button type="submit" class="btn primary full" style="margin-top: 15px;">Registrarse</button>
+            <button type="submit" class="btn primary full" style="margin-top: 15px;">Guardar / Actualizar Perfil</button>
           </form>
         </div>
       </section>
 
-      <!-- BIBLIOTECA -->
+      <!-- BIBLIOTECA, CARPETAS Y SUBIDA -->
       <section id="librarySection" class="page-section">
-        <div class="section-heading" style="margin-bottom: 25px;">
-          <span class="badge">RECURSOS</span>
-          <h2 style="color:var(--blue); font-size:2rem; margin-bottom:5px;">Biblioteca Digital</h2>
-          <p style="color:var(--gray-dark);">Listado oficial de recursos aprobados (PDFs, videos y archivos).</p>
+        <div class="section-heading" style="margin-bottom: 10px;">
+          <span class="badge">RECURSOS POR COMISIONES</span>
+          <h2 style="color:var(--blue); font-size:2rem; margin-bottom:5px;">Biblioteca y Comisiones</h2>
+          <p style="color:var(--gray-dark);">Explora carpetas organizadas por comisión o añade contenido.</p>
         </div>
-        <div id="resourcesList" class="resources-grid">
-          <div class="loading">Cargando recursos...</div>
+
+        <!-- ACCIONES RÁPIDAS -->
+        <div id="libraryActionsContainer" class="library-actions" style="display: none;">
+          <button id="btnCreateFolderQuick" class="btn-mini create-folder" onclick="toggleFolderForm()">📁 Crear carpeta</button>
+          <button class="btn-mini upload-file" onclick="scrollToUpload()">📤 Subir archivo</button>
+        </div>
+
+        <!-- Formulario para crear carpetas -->
+        <div id="adminFolderContainer" class="form-container wide" style="display: none; margin-bottom: 30px;">
+          <h3>📁 Crear Nueva Carpeta de Comisión</h3>
+          <p>Asigna un nombre para estructurar una nueva comisión.</p>
+          <form onsubmit="event.preventDefault(); createFolder();">
+            <label>Nombre de la Comisión / Carpeta</label>
+            <input id="newFolderName" type="text" placeholder="Ej. Comisión de Logística" required>
+            <button type="submit" class="btn primary full" style="margin-top: 10px;">Crear Carpeta</button>
+          </form>
+        </div>
+
+        <!-- Contenedor visual de carpetas -->
+        <div id="foldersListContainer" class="folders-container">
+          <div class="loading">Cargando carpetas y comisiones...</div>
+        </div>
+
+        <!-- Formulario para subir archivos de cualquier tipo -->
+        <div id="uploadFormContainer" class="form-container wide" style="margin-top: 40px; display: none;">
+          <h2>📤 Subir Documento a Comisión</h2>
+          <p>Sube cualquier tipo de archivo (PDF, Word, Excel, imágenes, etc.) seleccionando la carpeta o comisión de destino.</p>
+          <form onsubmit="event.preventDefault(); uploadResource();">
+            <label>Título del recurso</label>
+            <input id="resTitle" type="text" placeholder="Título descriptivo" required>
+
+            <label>Descripción</label>
+            <textarea id="resDesc" rows="3" placeholder="Breve detalle del contenido..." required></textarea>
+
+            <label>Seleccionar Carpeta / Comisión</label>
+            <select id="resFolderSelect" required>
+              <option value="">Selecciona una carpeta...</option>
+            </select>
+
+            <label>Seleccionar Archivo (PDF, Word, Excel, Imagen, etc.)</label>
+            <input id="resFile" type="file" required>
+
+            <button type="submit" class="btn primary full" style="margin-top: 15px;">Subir Archivo a la Nube</button>
+          </form>
+        </div>
+
+        <!-- Panel de Administración -->
+        <div id="adminControlPanel" class="admin-panel-section" style="display: none;">
+          <h3>⚙️ Panel de Control de Administración</h3>
+          <p style="color: var(--gray-dark); margin-bottom: 20px;">Gestión de elementos del sistema. Puedes eliminar registros que ya no necesites.</p>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+            <div>
+              <h4 style="color: var(--blue); margin-bottom: 10px;">👥 Voluntarios</h4>
+              <div id="adminVolunteersList">
+                <p style="font-size: 0.85rem; color: var(--gray-dark);">Cargando voluntarios...</p>
+              </div>
+            </div>
+            <div>
+              <h4 style="color: var(--blue); margin-bottom: 10px;">📁 Carpetas</h4>
+              <div id="adminFoldersList">
+                <p style="font-size: 0.85rem; color: var(--gray-dark);">Cargando carpetas...</p>
+              </div>
+            </div>
+            <div>
+              <h4 style="color: var(--blue); margin-bottom: 10px;">📄 Documentos</h4>
+              <div id="adminResourcesList">
+                <p style="font-size: 0.85rem; color: var(--gray-dark);">Cargando documentos...</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -345,12 +427,12 @@
       <!-- BUZÓN ANÓNIMO -->
       <section id="anonSection" class="page-section">
         <div class="form-container wide">
-          <h2>💡 Buzón Anónimo</h2>
-          <p>Envía tus sugerencias, ideas o comentarios de manera totalmente confidencial a la administración.</p>
+          <h2>💡 Buzón Anónimo / Recomendaciones</h2>
+          <p>Envía tus sugerencias, recomendaciones o comentarios de manera totalmente confidencial a la administración.</p>
           <form onsubmit="event.preventDefault(); sendAnonMessage();">
-            <label>Tu mensaje o sugerencia</label>
-            <textarea id="anonText" rows="5" placeholder="Escribe aquí tu mensaje de forma libre y anónima..." required></textarea>
-            <button type="submit" class="btn primary full" style="margin-top: 15px;">Enviar mensaje anónimo</button>
+            <label>Tu mensaje, recomendación o sugerencia</label>
+            <textarea id="anonText" rows="5" placeholder="Escribe aquí tu recomendación o mensaje de forma libre..." required></textarea>
+            <button type="submit" class="btn primary full" style="margin-top: 15px;">Enviar recomendación</button>
           </form>
         </div>
       </section>
@@ -359,95 +441,46 @@
       <section id="chatSection" class="page-section">
         <div class="form-container wide">
           <h2>❓ Chat de Preguntas</h2>
-          <p>Envía tu duda a la comunidad y la administración te responderá.</p>
+          <p>Consulta las dudas públicas de la comunidad o envía tu propia pregunta.</p>
           
+          <form onsubmit="event.preventDefault(); sendQuestion();" style="margin-bottom: 25px;">
+            <label>Escribe tu pregunta</label>
+            <input id="questionText" type="text" placeholder="¿Tienes alguna duda sobre la plataforma o comisiones?" required>
+            <button type="submit" class="btn primary" style="margin-top: 8px; width: auto;">Enviar pregunta</button>
+          </form>
+
           <div id="chatMessages" class="chat-container">
             <div class="loading">Cargando preguntas...</div>
           </div>
-
-          <div data-auth="logged-in" style="display:none; margin-top:20px;">
-            <form onsubmit="event.preventDefault(); sendQuestion();">
-              <label>Escribe tu pregunta</label>
-              <textarea id="questionText" rows="3" placeholder="¿Tienes alguna duda sobre los recursos o actividades?" required></textarea>
-              <button type="submit" class="btn primary full" style="margin-top: 10px;">Enviar pregunta</button>
-            </form>
-          </div>
-          <div data-auth="logged-out" style="text-align:center; margin-top:15px;">
-            <p style="color:var(--gray-dark);">Debes <a href="#" onclick="showSection('loginSection')" style="color:var(--blue);">iniciar sesión</a> para enviar preguntas.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SUBIR ARCHIVO -->
-      <section id="uploadSection" class="page-section">
-        <div class="form-container wide">
-          <h2>📤 Subir Archivo o Material</h2>
-          <p>Sube todo tipo de archivos (PDFs, videos, documentos, imágenes, etc.) para compartir con la comunidad.</p>
-          <form onsubmit="event.preventDefault(); uploadResource();">
-            <label>Título del archivo o recurso</label>
-            <input id="resourceTitle" type="text" placeholder="Ej. Video explicativo, Guía PDF..." required>
-            
-            <label>Descripción detallada</label>
-            <textarea id="resourceDescription" rows="4" placeholder="Breve resumen del contenido..."></textarea>
-            
-            <label>Categoría / Tipo de material</label>
-            <input id="resourceCategory" type="text" placeholder="Ej. Videos, Documentos PDF, Presentaciones...">
-            
-            <label>Seleccionar Archivo (PDF, MP4, Word, etc.)</label>
-            <input id="resourceFile" type="file" required>
-            
-            <button type="submit" class="btn primary full" style="margin-top: 15px;">Subir y enviar a revisión</button>
-          </form>
-        </div>
-      </section>
-
-      <!-- ADMINISTRACIÓN -->
-      <section id="adminSection" class="page-section">
-        <div class="section-heading" style="margin-bottom: 25px;">
-          <span class="badge" style="background:var(--black);">ADMINISTRACIÓN</span>
-          <h2 style="color:var(--blue); font-size:2rem; margin-bottom:5px;">Panel de control</h2>
-          <p style="color:var(--gray-dark);">Gestión de archivos pendientes, buzón anónimo y respuestas del chat.</p>
-        </div>
-        
-        <div class="admin-panel">
-          <div class="admin-panel-header"><h3>⏳ Archivos / Recursos pendientes de aprobación</h3></div>
-          <div id="pendingResources"><div class="admin-item"><p>Cargando pendientes...</p></div></div>
-        </div>
-
-        <div class="admin-panel" style="margin-top: 25px;">
-          <div class="admin-panel-header"><h3>💡 Mensajes del Buzón Anónimo</h3></div>
-          <div id="adminAnonMessages"><div class="admin-item"><p>Cargando buzón anónimo...</p></div></div>
-        </div>
-
-        <div class="admin-panel" style="margin-top: 25px;">
-          <div class="admin-panel-header"><h3>❓ Responder preguntas del Chat</h3></div>
-          <div id="adminQuestions"><div class="admin-item"><p>Cargando preguntas...</p></div></div>
         </div>
       </section>
     </main>
 
     <footer>
       <p>Librería Digital CELIDER · Distrito 16-04</p>
-      <p class="credits">Hecho por <strong>Eliana Rosario</strong> y <strong>Joel Suriel</strong></p>
+      <p class="credits">Hecho por <strong>Eliana Rosario</strong> and <strong>Joel Suriel</strong></p>
     </footer>
   </div>
 
 <script>
-  const SUPABASE_URL = 'https://aengimhhhwlwtxhijsxb.supabase.co';
+  const SUPABASE_URL = 'https://aengimhhhwlwthxijsxb.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlbmdpbWhoaHdsd3RoeGlqc3hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1MDcxMTAsImV4cCI6MjEwMzA4MzExMH0.-IMKBgOTQJwJ8uFPQ1Ocby2kBjht07kMkKXHO1XwGOE';
   const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  let currentUser = null;
-  let isAdmin = false;
-
   const $ = id => document.getElementById(id);
 
-  // Transición dinámica de entrada al hacer clic en el logo
+  let currentUserRole = localStorage.getItem('celider_user_role') || null; 
+  let currentUserId = localStorage.getItem('celider_user_id') || null;
+
   window.enterPlatform = function() {
     $("welcomeIntroScreen").classList.add('hidden');
     const mainApp = $("mainAppContainer");
     mainApp.classList.add('active-app');
-    checkUserSession();
+    applyRolePermissionsUI();
+    loadFoldersAndResources();
+    loadVolunteersProfiles();
+    loadChatQuestions();
+    if (currentUserId && currentUserRole !== 'delegado') loadMyProfileData();
   };
 
   function showMessage(text, type = "info") {
@@ -468,151 +501,342 @@
     }
   };
 
-  async function checkUserSession() {
-    const { data: { session } } = await supabaseClient.auth.getSession();
-    currentUser = session?.user || null;
-    
-    if (currentUser) {
-      const { data } = await supabaseClient
-        .from('profiles')
-        .select('role')
-        .eq('id', currentUser.id)
-        .single();
-      
-      isAdmin = data?.role === 'admin';
+  window.toggleFolderForm = function() {
+    const folderBox = $("adminFolderContainer");
+    if (folderBox.style.display === 'none' || folderBox.style.display === '') {
+      folderBox.style.display = 'block';
+      folderBox.scrollIntoView({ behavior: 'smooth' });
     } else {
-      isAdmin = false;
+      folderBox.style.display = 'none';
     }
+  };
+
+  window.scrollToUpload = function() {
+    $("uploadFormContainer").scrollIntoView({ behavior: 'smooth' });
+    $("resTitle").focus();
+  };
+
+  window.assignRoleAutomatically = async function() {
+    const name = $("reqName").value.trim();
+    const email = $("reqEmail").value.trim();
+    const code = $("reqCode").value.trim();
+
+    let roleAssigned = "";
+    if (code === "VOLUNTARIOS1604") {
+      roleAssigned = "voluntario";
+    } else if (code === "ADMINISTRACION1604") {
+      roleAssigned = "admin";
+    } else if (code === "DELEGADOS1604") {
+      roleAssigned = "delegado";
+    } else {
+      showMessage("El código secreto ingresado es incorrecto.", "error");
+      return;
+    }
+
+    const { data, error } = await supabaseClient.from('profiles').insert([
+      { full_name: name, email: email, role: roleAssigned }
+    ]).select();
+
+    if (error) {
+      showMessage("Error al registrar el usuario: " + error.message, "error");
+      return;
+    }
+
+    if (data && data.length > 0) {
+      currentUserId = data[0].id;
+      localStorage.setItem('celider_user_id', currentUserId);
+    }
+
+    currentUserRole = roleAssigned;
+    localStorage.setItem('celider_user_role', currentUserRole);
+    applyRolePermissionsUI();
+
+    showMessage(`¡Felicidades ${name}! Tu rol ha sido asignado con éxito.`, "success");
+    $("reqName").value = "";
+    $("reqEmail").value = "";
+    $("reqCode").value = "";
     
-    updateNavUI();
-    loadPublicResources();
+    if (roleAssigned !== 'delegado') {
+      showSection('myProfileSection');
+      $("profileName").value = name;
+      $("profileEmail").value = email;
+      $("profileRole").value = roleAssigned;
+    } else {
+      showSection('homeSection');
+    }
     loadVolunteersProfiles();
-    loadChatQuestions();
-    if (isAdmin) {
-      loadPendingResources();
-      loadAdminQuestions();
-      loadAdminAnonMessages();
+  };
+
+  window.saveMyProfile = async function() {
+    const name = $("profileName").value.trim();
+    const email = $("profileEmail").value.trim();
+    const commission = $("profileCommission").value.trim();
+    const role = $("profileRole").value;
+
+    if (currentUserId) {
+      const { error } = await supabaseClient.from('profiles').update({
+        full_name: name,
+        email: email,
+        commission: commission,
+        role: role
+      }).eq('id', currentUserId);
+
+      if (error) {
+        showMessage("Error al actualizar el perfil: " + error.message, "error");
+        return;
+      }
+      currentUserRole = role;
+      localStorage.setItem('celider_user_role', currentUserRole);
+      applyRolePermissionsUI();
+      showMessage("¡Tu perfil ha sido actualizado con éxito!", "success");
+    } else {
+      const { data, error } = await supabaseClient.from('profiles').insert([
+        { full_name: name, email: email, commission: commission, role: role }
+      ]).select();
+
+      if (error) {
+        showMessage("Error al crear el perfil: " + error.message, "error");
+        return;
+      }
+
+      if (data && data.length > 0) {
+        currentUserId = data[0].id;
+        localStorage.setItem('celider_user_id', currentUserId);
+      }
+      currentUserRole = role;
+      localStorage.setItem('celider_user_role', currentUserRole);
+      applyRolePermissionsUI();
+      showMessage("¡Tu perfil ha sido creado con éxito!", "success");
+    }
+    loadVolunteersProfiles();
+    showSection('homeSection');
+  };
+
+  async function loadMyProfileData() {
+    if (!currentUserId) return;
+    const { data, error } = await supabaseClient.from('profiles').select('*').eq('id', currentUserId).single();
+    if (data && !error) {
+      $("profileName").value = data.full_name || '';
+      $("profileEmail").value = data.email || '';
+      $("profileCommission").value = data.commission || '';
+      $("profileRole").value = data.role || 'voluntario';
     }
   }
 
-  function updateNavUI() {
-    document.querySelectorAll('[data-auth="logged-in"]').forEach(el => {
-      el.style.display = currentUser ? 'inline-block' : 'none';
-    });
-    document.querySelectorAll('[data-auth="logged-out"]').forEach(el => {
-      el.style.display = !currentUser ? 'inline-block' : 'none';
-    });
-    document.querySelectorAll('[data-role="admin"]').forEach(el => {
-      el.style.display = isAdmin ? 'inline-block' : 'none';
-    });
+  function applyRolePermissionsUI() {
+    if (currentUserRole === 'delegado') {
+      $("navMyProfile").style.display = 'none';
+      $("libraryActionsContainer").style.display = 'none';
+      $("uploadFormContainer").style.display = 'none';
+      $("adminControlPanel").style.display = 'none';
+    } else if (currentUserRole === 'admin' || currentUserRole === 'voluntario') {
+      $("navMyProfile").style.display = 'inline-block';
+      $("libraryActionsContainer").style.display = 'flex';
+      $("uploadFormContainer").style.display = 'block';
+      if (currentUserRole === 'admin') {
+        $("adminControlPanel").style.display = 'block';
+        loadAdminManagementLists();
+      }
+    } else {
+      $("navMyProfile").style.display = 'none';
+      $("libraryActionsContainer").style.display = 'none';
+      $("uploadFormContainer").style.display = 'none';
+      $("adminControlPanel").style.display = 'none';
+    }
   }
 
-  window.registerUser = async function() {
-    const name = $("registerName").value.trim();
-    const roleType = $("registerRoleType").value;
-    const email = $("registerEmail").value.trim();
-    const password = $("registerPassword").value;
-    const specialCode = $("registerSpecialCode").value.trim();
+  window.createFolder = async function() {
+    const name = $("newFolderName").value.trim();
+    if (!name) return;
 
-    let assignedRole = roleType;
-    if (specialCode === 'celider1604losmejores') {
-      assignedRole = 'admin';
-    } else if (specialCode === 'voluntariosalcien') {
-      assignedRole = 'voluntario';
-    }
-
-    const { data, error } = await supabaseClient.auth.signUp({
-      email,
-      password,
-      options: { data: { full_name: name, role: assignedRole } }
-    });
-
+    const { error } = await supabaseClient.from('folders').insert([{ name }]);
     if (error) {
-      showMessage(error.message, "error");
+      showMessage("Error al crear la carpeta: " + error.message, "error");
       return;
     }
 
-    if (data.user) {
-      await supabaseClient.from('profiles').upsert([
-        { id: data.user.id, full_name: name, role: assignedRole }
-      ]);
-    }
-
-    showMessage("¡Registro exitoso! Ya puedes iniciar sesión.", "success");
-    showSection('loginSection');
+    $("newFolderName").value = "";
+    $("adminFolderContainer").style.display = 'none';
+    showMessage("¡Carpeta creada con éxito!", "success");
+    loadFoldersAndResources();
+    if (currentUserRole === 'admin') loadAdminManagementLists();
   };
 
-  window.loginUser = async function() {
-    const email = $("loginEmail").value.trim();
-    const password = $("loginPassword").value;
+  async function loadFoldersAndResources() {
+    const container = $("foldersListContainer");
+    const select = $("resFolderSelect");
 
-    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-    if (error) {
-      showMessage("Credenciales incorrectas o error al entrar.", "error");
+    const { data: folders, error: fError } = await supabaseClient.from('folders').select('*');
+    const { data: resources, error: rError } = await supabaseClient.from('resources').select('*');
+
+    if (fError || !folders || folders.length === 0) {
+      container.innerHTML = `<div class="empty-state">No hay carpetas o comisiones creadas todavía.</div>`;
+      if (select) select.innerHTML = '<option value="">No hay carpetas disponibles</option>';
       return;
     }
 
-    showMessage("Sesión iniciada correctamente.", "success");
-    showSection('homeSection');
-    checkUserSession();
-  };
+    if (select) {
+      select.innerHTML = '<option value="">Selecciona una carpeta...</option>' + 
+        folders.map(f => `<option value="${f.id}">${f.name}</option>`).join('');
+    }
 
-  window.logoutUser = async function() {
-    await supabaseClient.auth.signOut();
-    currentUser = null;
-    isAdmin = false;
-    updateNavUI();
-    showMessage("Has cerrado sesión.", "info");
-    showSection('homeSection');
-  };
+    container.innerHTML = folders.map(folder => {
+      const folderResources = resources ? resources.filter(r => r.folder_id === folder.id) : [];
+      
+      return `
+        <div class="folder-box">
+          <h3>📁 ${folder.name}</h3>
+          <div style="margin-top: 15px;">
+            ${folderResources.length === 0 ? '<p style="color:var(--gray-dark); font-size:0.9rem;">Sin documentos en esta comisión.</p>' : 
+              folderResources.map(res => `
+                <div style="background:var(--gray); padding:10px; border-radius:8px; margin-bottom:8px;">
+                  <strong style="display:block; color:var(--blue);">${res.title}</strong>
+                  <p style="font-size:0.85rem; color:var(--gray-dark); margin:4px 0;">${res.description || ''}</p>
+                  <a href="${res.file_url}" target="_blank" rel="noopener" style="font-size:0.85rem; color:var(--blue-light);">📥 Descargar archivo</a>
+                </div>
+              `).join('')
+            }
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
 
   window.uploadResource = async function() {
-    if (!currentUser) return;
-    const title = $("resourceTitle").value.trim();
-    const description = $("resourceDescription").value.trim();
-    const category = $("resourceCategory").value.trim();
-    const file = $("resourceFile").files[0];
+    const title = $("resTitle").value.trim();
+    const description = $("resDesc").value.trim();
+    const folder_id = $("resFolderSelect").value;
+    const fileInput = $("resFile");
 
-    if (!file) { showMessage("Selecciona un archivo.", "error"); return; }
-
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
-    const filePath = `recursos/${fileName}`;
-
-    const { error: uploadError } = await supabaseClient.storage.from('library-files').upload(filePath, file);
-    if (uploadError) { showMessage("Error al subir archivo: " + uploadError.message, "error"); return; }
-
-    const { data: urlData } = supabaseClient.storage.from('library-files').getPublicUrl(filePath);
-
-    const { error: dbError } = await supabaseClient.from('resources').insert([{
-      title, description, category, file_url: urlData.publicUrl, status: 'pending', user_id: currentUser.id
-    }]);
-
-    if (dbError) { showMessage("Error en base de datos: " + dbError.message, "error"); return; }
-
-    showMessage("¡Archivo subido y enviado a revisión con éxito!", "success");
-    document.getElementById('resourceFile').value = "";
-    showSection('librarySection');
-  };
-
-  async function loadPublicResources() {
-    const list = $("resourcesList");
-    const { data, error } = await supabaseClient.from('resources').select('*').eq('status', 'approved');
-
-    if (error || !data || data.length === 0) {
-      list.innerHTML = `<div class="empty-state">No hay recursos aprobados disponibles todavía.</div>`;
+    if (!folder_id) {
+      showMessage("Por favor, selecciona una carpeta de destino.", "error");
       return;
     }
 
-    list.innerHTML = data.map(item => `
-      <div class="resource-card">
-        <span class="badge" style="margin-bottom:8px;">${item.category || 'General'}</span>
-        <h3>${item.title}</h3>
-        <p>${item.description || 'Sin descripción'}</p>
-        <a href="${item.file_url}" target="_blank" rel="noopener">📥 Ver / Descargar Archivo</a>
-      </div>
-    `).join('');
+    if (!fileInput.files || fileInput.files.length === 0) {
+      showMessage("Por favor, selecciona un archivo para subir.", "error");
+      return;
+    }
+
+    const file = fileInput.files[0];
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
+    const filePath = `${fileName}`;
+
+    showMessage("Subiendo archivo a la nube... Por favor espera.", "info");
+
+    const { error: uploadError } = await supabaseClient.storage
+      .from('documents')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      showMessage("Error al subir el archivo al Storage: " + uploadError.message, "error");
+      return;
+    }
+
+    const { data: publicURLData } = supabaseClient.storage
+      .from('documents')
+      .getPublicUrl(filePath);
+
+    const file_url = publicURLData.publicUrl;
+
+    const { error: dbError } = await supabaseClient.from('resources').insert([
+      { title, description, folder_id, file_url, status: 'approved' }
+    ]);
+
+    if (dbError) {
+      showMessage("Error al registrar el documento en la base de datos: " + dbError.message, "error");
+      return;
+    }
+
+    showMessage("¡Archivo subido y publicado correctamente!", "success");
+    $("resTitle").value = "";
+    $("resDesc").value = "";
+    $("resFile").value = "";
+    $("resFolderSelect").value = "";
+    loadFoldersAndResources();
+    if (currentUserRole === 'admin') loadAdminManagementLists();
+  };
+
+  async function loadAdminManagementLists() {
+    const volContainer = $("adminVolunteersList");
+    const folContainer = $("adminFoldersList");
+    const resContainer = $("adminResourcesList");
+
+    const { data: volunteers } = await supabaseClient.from('profiles').select('*');
+    const { data: folders } = await supabaseClient.from('folders').select('*');
+    const { data: resources } = await supabaseClient.from('resources').select('*');
+
+    if (volunteers && volunteers.length > 0) {
+      volContainer.innerHTML = volunteers.map(v => `
+        <div class="admin-list-item">
+          <span style="font-size:0.85rem; overflow:hidden; text-overflow:ellipsis;">${v.full_name}</span>
+          <button class="btn danger" style="padding:4px 8px; font-size:0.75rem;" onclick="deleteVolunteer('${v.id}')">Borrar</button>
+        </div>
+      `).join('');
+    } else {
+      volContainer.innerHTML = "<p style='font-size:0.85rem; color:var(--gray-dark);'>No hay voluntarios.</p>";
+    }
+
+    if (folders && folders.length > 0) {
+      folContainer.innerHTML = folders.map(f => `
+        <div class="admin-list-item">
+          <span style="font-size:0.85rem; overflow:hidden; text-overflow:ellipsis;">📁 ${f.name}</span>
+          <button class="btn danger" style="padding:4px 8px; font-size:0.75rem;" onclick="deleteFolder('${f.id}')">Borrar</button>
+        </div>
+      `).join('');
+    } else {
+      folContainer.innerHTML = "<p style='font-size:0.85rem; color:var(--gray-dark);'>No hay carpetas.</p>";
+    }
+
+    if (resources && resources.length > 0) {
+      resContainer.innerHTML = resources.map(r => `
+        <div class="admin-list-item">
+          <span style="font-size:0.85rem; overflow:hidden; text-overflow:ellipsis;">📄 ${r.title}</span>
+          <button class="btn danger" style="padding:4px 8px; font-size:0.75rem;" onclick="deleteResource('${r.id}')">Borrar</button>
+        </div>
+      `).join('');
+    } else {
+      resContainer.innerHTML = "<p style='font-size:0.85rem; color:var(--gray-dark);'>No hay documentos.</p>";
+    }
   }
+
+  window.deleteVolunteer = async function(id) {
+    if (!confirm("¿Estás seguro de eliminar este voluntario?")) return;
+    const { error } = await supabaseClient.from('profiles').delete().eq('id', id);
+    if (error) {
+      showMessage("Error al borrar voluntario", "error");
+    } else {
+      showMessage("Voluntario eliminado con éxito", "success");
+      loadAdminManagementLists();
+      loadVolunteersProfiles();
+    }
+  };
+
+  window.deleteFolder = async function(id) {
+    if (!confirm("¿Estás seguro de eliminar esta carpeta y sus contenidos?")) return;
+    await supabaseClient.from('resources').delete().eq('folder_id', id);
+    const { error } = await supabaseClient.from('folders').delete().eq('id', id);
+    if (error) {
+      showMessage("Error al borrar la carpeta", "error");
+    } else {
+      showMessage("Carpeta eliminada con éxito", "success");
+      loadFoldersAndResources();
+      loadAdminManagementLists();
+    }
+  };
+
+  window.deleteResource = async function(id) {
+    if (!confirm("¿Estás seguro de eliminar este documento?")) return;
+    const { error } = await supabaseClient.from('resources').delete().eq('id', id);
+    if (error) {
+      showMessage("Error al borrar el documento", "error");
+    } else {
+      showMessage("Documento eliminado con éxito", "success");
+      loadFoldersAndResources();
+      loadAdminManagementLists();
+    }
+  };
 
   async function loadVolunteersProfiles() {
     const container = $("volunteersList");
@@ -625,11 +849,9 @@
 
     container.innerHTML = data.map(user => `
       <div class="volunteer-card">
-        <span class="badge" style="background:${user.role === 'admin' ? 'var(--black)' : (user.role === 'delegado' ? 'var(--red)' : 'var(--blue)')}; margin-bottom:8px;">
-          ${user.role ? user.role.toUpperCase() : 'VOLUNTARIO'}
-        </span>
         <h3>${user.full_name || 'Miembro CELIDER'}</h3>
-        <p>Miembro activo del distrito 16-04 comprometido con la educación y el desarrollo comunitario.</p>
+        <p><strong>📧 Correo:</strong> ${user.email || 'No especificado'}</p>
+        <p><strong>🏛️ Comisión:</strong> ${user.commission || 'Aún no asignada'}</p>
       </div>
     `).join('');
   }
@@ -641,130 +863,49 @@
     const { error } = await supabaseClient.from('anonymous_messages').insert([{ message: text }]);
 
     if (error) {
-      showMessage("Error al enviar mensaje anónimo.", "error");
+      showMessage("Error al enviar recomendación.", "error");
       return;
     }
 
     $("anonText").value = "";
-    showMessage("¡Tu mensaje anónimo ha sido enviado con éxito!", "success");
+    showMessage("¡Tu recomendación ha sido enviada con éxito!", "success");
     showSection('homeSection');
   };
 
-  async function loadAdminAnonMessages() {
-    const container = $("adminAnonMessages");
-    const { data, error } = await supabaseClient.from('anonymous_messages').select('*').order('created_at', { ascending: false });
-
-    if (error || !data || data.length === 0) {
-      container.innerHTML = `<div class="admin-item"><p>No hay mensajes anónimos en el buzón.</p></div>`;
-      return;
-    }
-
-    container.innerHTML = data.map(item => `
-      <div class="admin-item">
-        <p>💡 <strong>Mensaje:</strong> ${item.message}</p>
-        <small style="color:var(--gray-dark);">${new Date(item.created_at).toLocaleString()}</small>
-      </div>
-    `).join('');
-  }
-
-  async function loadPendingResources() {
-    const container = $("pendingResources");
-    const { data } = await supabaseClient.from('resources').select('*').eq('status', 'pending');
-    if (!data || data.length === 0) {
-      container.innerHTML = `<div class="admin-item"><p>No hay archivos pendientes de aprobación.</p></div>`;
-      return;
-    }
-    container.innerHTML = data.map(item => `
-      <div class="admin-item">
-        <h3>${item.title}</h3>
-        <p>${item.description || ''}</p>
-        <a href="${item.file_url}" target="_blank">Ver Archivo Adjunto</a>
-        <div style="margin-top:10px;">
-          <button class="btn success" onclick="approveResource('${item.id}')">Aprobar</button>
-          <button class="btn danger" onclick="deleteResource('${item.id}')">Rechazar</button>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  window.approveResource = async function(id) {
-    await supabaseClient.from('resources').update({ status: 'approved' }).eq('id', id);
-    loadPendingResources(); loadPublicResources();
-  };
-
-  window.deleteResource = async function(id) {
-    await supabaseClient.from('resources').delete().eq('id', id);
-    loadPendingResources();
-  };
-
   window.sendQuestion = async function() {
-    const text = $("questionText").value.trim();
-    if (!text) return;
+    const qText = $("questionText").value.trim();
+    if (!qText) return;
 
-    const { error } = await supabaseClient.from('questions').insert([{
-      question: text, user_id: currentUser.id, answer: null
-    }]);
+    const { error } = await supabaseClient.from('questions').insert([{ question: qText }]);
 
     if (error) {
-      showMessage("Error al enviar pregunta", "error");
+      showMessage("Error al enviar la pregunta", "error");
       return;
     }
 
     $("questionText").value = "";
-    showMessage("Pregunta enviada correctamente.", "success");
+    showMessage("¡Pregunta enviada al chat con éxito!", "success");
     loadChatQuestions();
-    if (isAdmin) loadAdminQuestions();
   };
 
   async function loadChatQuestions() {
     const container = $("chatMessages");
+    if (!container) return;
     const { data, error } = await supabaseClient.from('questions').select('*').order('created_at', { ascending: false });
 
     if (error || !data || data.length === 0) {
-      container.innerHTML = `<div class="empty-state">No hay preguntas en el chat todavía. ¡Sé el primero en preguntar!</div>`;
+      container.innerHTML = `<div class="empty-state">No hay preguntas registradas todavía.</div>`;
       return;
     }
 
-    container.innerHTML = data.map(item => `
-      <div class="chat-bubble ${item.answer ? 'answered' : ''}">
+    container.innerHTML = data.map(q => `
+      <div class="chat-bubble ${q.answer ? 'answered' : ''}">
         <h4>Pregunta:</h4>
-        <p>${item.question}</p>
-        ${item.answer ? `<div style="margin-top:8px;"><strong>Respuesta Oficial:</strong><p>${item.answer}</p></div>` : `<small>Pendiente de respuesta institucional...</small>`}
+        <p>${q.question}</p>
+        ${q.answer ? `<h4>Respuesta oficial:</h4><p>${q.answer}</p>` : `<small>Pendiente de respuesta</small>`}
       </div>
     `).join('');
   }
-
-  async function loadAdminQuestions() {
-    const container = $("adminQuestions");
-    const { data } = await supabaseClient.from('questions').select('*').is('answer', null);
-
-    if (!data || data.length === 0) {
-      container.innerHTML = `<div class="admin-item"><p>No hay preguntas pendientes por responder.</p></div>`;
-      return;
-    }
-
-    container.innerHTML = data.map(item => `
-      <div class="admin-item">
-        <p><strong>Pregunta:</strong> ${item.question}</p>
-        <div style="margin-top:8px;">
-          <textarea id="reply_${item.id}" rows="2" placeholder="Escribe tu respuesta oficial..."></textarea>
-          <button class="btn primary" style="margin-top:8px;" onclick="answerQuestion('${item.id}')">Enviar Respuesta</button>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  window.answerQuestion = async function(id) {
-    const replyText = $(`reply_${id}`).value.trim();
-    if (!replyText) { showMessage("Escribe una respuesta.", "error"); return; }
-
-    const { error } = await supabaseClient.from('questions').update({ answer: replyText }).eq('id', id);
-    if (error) { showMessage("Error al responder", "error"); return; }
-
-    showMessage("Respuesta enviada con éxito.", "success");
-    loadAdminQuestions();
-    loadChatQuestions();
-  };
 </script>
 </body>
 </html>
